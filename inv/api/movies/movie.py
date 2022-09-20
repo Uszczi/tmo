@@ -5,21 +5,14 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 from bson import ObjectId
 from typing import Any, Optional, List
-from inv.db import get_db
 from inv.queries.movie import MovieQuery
 
 from inv.shared.models import PyObjectId
 
 from fastapi import APIRouter
+from inv.api.base import BaseApiResponse
 
-router = APIRouter(tags=["movies"])
-
-db = get_db()
-
-
-class BaseApiResponse(BaseModel):
-    class Config:
-        json_encoders = {ObjectId: str}
+router = APIRouter()
 
 
 class MovieModel(BaseApiResponse):
@@ -36,8 +29,7 @@ class MovieModel(BaseApiResponse):
     response_model_by_alias=False,
 )
 async def list_movies():
-    movies = await MovieQuery.get_all()
-    return movies
+    return await MovieQuery.get_all()
 
 
 @router.get(
@@ -47,15 +39,14 @@ async def list_movies():
 )
 async def get_movie(id: str):
     try:
-        movie = await MovieQuery.get(id)
-        return movie
+        return await MovieQuery.get(id)
     except Exception:
         raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
 
-@router.delete("/movie/{id}")
-async def delete_movie(id: str):
-    try:
-        await MovieQuery.delete(id)
-    except Exception:
-        raise HTTPException(status_code=404, detail=f"Student {id} not found")
+# @router.delete("/movie/{id}")
+# async def delete_movie(id: str):
+#     try:
+#         await MovieQuery.delete(id)
+#     except Exception:
+#         raise HTTPException(status_code=404, detail=f"Student {id} not found")

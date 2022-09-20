@@ -11,7 +11,7 @@ import attrs
 
 
 class MovieModel(BaseModel):
-    id: PyObjectId = Field(..., alias="_id")
+    id: PyObjectId = Field(alias="_id")
     title: str
     watch_date: date
     production_year: str | None = None
