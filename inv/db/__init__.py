@@ -1,5 +1,6 @@
-import motor.motor_asyncio
 import os
+
+import motor.motor_asyncio
 
 
 def get_db():

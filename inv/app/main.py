@@ -1,9 +1,8 @@
-from fastapi import FastAPI
-from inv.api.movies import router as movies_router
-from inv.api.books import router as books_router
-from fastapi import APIRouter
-
+from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+from inv.api.books import router as books_router
+from inv.api.movies import router as movies_router
 
 app = FastAPI()
 

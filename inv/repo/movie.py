@@ -1,7 +1,6 @@
 from datetime import date
 from typing import Protocol
 
-
 from inv.db import get_db
 from inv.db.models.movie import MovieModel
 

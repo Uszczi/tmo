@@ -1,10 +1,10 @@
-from datetime import date, datetime
-from fastapi import FastAPI, Body, HTTPException, status
-from fastapi.responses import Response, JSONResponse
-from pydantic import BaseModel, Field
-from inv.db import get_db
+from datetime import date
+
+from fastapi import APIRouter, status
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+
 from inv.repo.movie import MovieRepo
-from fastapi import APIRouter
 
 router = APIRouter()
 

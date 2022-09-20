@@ -1,11 +1,6 @@
-from dataclasses import dataclass
-from bson import ObjectId
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from inv.shared.models import PyObjectId
-from pydantic import Field
-
-from attrs import asdict, define, make_class, Factory
 
 
 class Book(BaseModel):

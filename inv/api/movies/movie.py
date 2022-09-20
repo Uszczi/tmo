@@ -1,16 +1,11 @@
-from fastapi import FastAPI, Body, HTTPException, status
-from datetime import date
-from fastapi.responses import Response, JSONResponse
-from fastapi.encoders import jsonable_encoder
-from pydantic import BaseModel, Field
-from bson import ObjectId
-from typing import Any, Optional, List
-from inv.queries.movie import MovieQuery
+from typing import Any
 
-from inv.shared.models import PyObjectId
+from fastapi import APIRouter, HTTPException
+from pydantic import Field
 
-from fastapi import APIRouter
 from inv.api.base import BaseApiResponse
+from inv.queries.movie import MovieQuery
+from inv.shared.models import PyObjectId
 
 router = APIRouter()
 

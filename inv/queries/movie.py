@@ -1,6 +1,6 @@
-from inv.db import get_db
 from bson import ObjectId
 
+from inv.db import get_db
 from inv.db.models.movie import MovieModel
 
 

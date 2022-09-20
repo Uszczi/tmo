@@ -1,7 +1,7 @@
-from inv.api.movies.movie import router as movie_router
-from inv.api.movies.create import router as create_router
-
 from fastapi import APIRouter
+
+from inv.api.movies.create import router as create_router
+from inv.api.movies.movie import router as movie_router
 
 router = APIRouter(tags=["Movies"])
 
