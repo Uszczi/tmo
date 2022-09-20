@@ -6,6 +6,7 @@ from dataclasses import dataclass
 import re
 
 from inv.db import get_db
+from inv.repo.movie import MovieRepo
 
 db = get_db()
 
@@ -56,7 +57,7 @@ def process_line(line: str, watch_year: int):
         directors: str
 
     movie = Movie(title, production_year, watch_date, directors)
-    return jsonable_encoder(movie)
+    return movie
 
 
 async def fill_db_with_movies():
@@ -74,7 +75,7 @@ async def fill_db_with_movies():
                 except Exception as e:
                     print(f"Failed for {path} line: {index} {e=}")
 
-    await db["students"].insert_many(aaa)
+    await MovieRepo.create_many(aaa)
 
 
 if __name__ == "__main__":
