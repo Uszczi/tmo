@@ -19,7 +19,7 @@ class MovieQuery:
     @classmethod
     async def get_all(cls) -> list[MovieModel]:
         db = get_db()
-        movies = await db["movie"].find().to_list(1000)
+        movies = await db["movie"].find().sort([("watch_date", -1)]).to_list(1000)
         return movies
 
     # @classmethod

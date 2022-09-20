@@ -1,6 +1,9 @@
 from datetime import date
 from typing import Protocol
 
+from bson import ObjectId
+from fastapi.encoders import jsonable_encoder
+
 from inv.db import get_db
 from inv.db.models.movie import MovieModel
 
@@ -10,6 +13,16 @@ class CreateMovie(Protocol):
     watch_date: date
     production_year: str | None
     directors: str | None
+
+
+class UpdateMovie(Protocol):
+    title: str | None
+    watch_date: date | None
+    production_year: str | None
+    directors: str | None
+
+    def to_update(self) -> dict:
+        return {}
 
 
 class MovieRepo:
@@ -45,8 +58,11 @@ class MovieRepo:
         return new_movie
 
     @classmethod
-    def update(cls):
-        pass
+    async def update(cls, id: str, movie: UpdateMovie):
+        db = get_db()
+        await db.movie.update_one(
+            {"_id": ObjectId(id)}, {"$set": jsonable_encoder(movie.to_update())}
+        )
 
     @classmethod
     def get(cls):
