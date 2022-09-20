@@ -18,11 +18,11 @@ def get_example_data_paths():
 
 
 def extract_directors(line: str) -> tuple[str, str]:
-    directors = re.findall(r"\*\*.*\*\*", line)
-    if not directors:
+    maybe_directors = re.findall(r"\*\*.*\*\*", line)
+    if not maybe_directors:
         raise Exception
 
-    directors = directors[0]
+    directors = maybe_directors[0]
     line = line.removesuffix(directors).strip()
 
     directors = directors.removesuffix("**").removeprefix("**")
@@ -30,11 +30,11 @@ def extract_directors(line: str) -> tuple[str, str]:
 
 
 def extract_production_year(line: str) -> tuple[str, int]:
-    production_year = re.findall("\([0-9]*\)", line)
-    if not production_year:
+    maybe_production_year = re.findall(r"\([0-9]*\)", line)
+    if not maybe_production_year:
         raise Exception
 
-    production_year = production_year[0]
+    production_year = maybe_production_year[0]
     line = line.removesuffix(production_year).strip()
 
     production_year = production_year[1:-1]
@@ -50,8 +50,8 @@ def process_line(line: str, watch_year: int):
     @dataclass
     class Movie:
         title: str
-        production_year: str
-        watch_date: str
+        production_year: int
+        watch_date: date
         directors: str
 
     movie = Movie(title, production_year, watch_date, directors)
