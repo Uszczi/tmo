@@ -17,7 +17,7 @@ db = get_db()
 
 class UpdateMovieModel(BaseModel):
     title: Optional[str]
-    published: Optional[str]
+    published_year: Optional[str]
     watch_date: Optional[str]
     directors: Optional[str]
 
@@ -39,7 +39,7 @@ class UpdateMovieModel(BaseModel):
 class MovieModel(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     title: str | None = None
-    published: str | None = None
+    production_year: str | None = None
     watch_date: str | None = None
     directors: str | None = None
 
@@ -68,7 +68,7 @@ async def create_movie(student: MovieModel = Body(...)):
 
 @router.get("/movies", response_model=List[MovieModel])
 async def list_movies():
-    students = await db["students"].find().to_list(10000)
+    students = await db["students"].find().to_list(1000)
     return students
 
 
