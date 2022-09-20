@@ -1,0 +1,9 @@
+appdirs
+black
+dnspython
+fastapi
+flake8
+uvicorn
+bson
+motor
+click
